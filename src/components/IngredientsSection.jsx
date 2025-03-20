@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import { RxCross2 } from 'react-icons/rx'
 import styles from './IngredientsSection.module.css'
 
 export default function IngredientsSection() {
@@ -12,14 +13,25 @@ export default function IngredientsSection() {
 
   const handleAddIngredient = e => {
     e.preventDefault()
+    const trimmedValue = inputValue.trim()
+
+    if (!trimmedValue) return
 
     setIngredientsList(prevIngredients => [
       ...prevIngredients,
-      { id: uuidv4(), name: inputValue },
+      { id: uuidv4(), name: trimmedValue },
     ])
 
     setInputValue('')
   }
+
+  const handleDeleteIngredient = id => {
+    setIngredientsList(prevIngredients =>
+      prevIngredients.filter(ingredient => ingredient.id !== id)
+    )
+  }
+
+  const handleGetRecipe = () => {}
 
   return (
     <section className={styles.sectionWrapper}>
@@ -31,7 +43,9 @@ export default function IngredientsSection() {
           value={inputValue}
           onChange={handleInputChange}
         />
-        <button className={styles.ingredientsBtn}>+ Add ingredient</button>
+        <button className={styles.ingredientsBtn} disabled={!inputValue.trim()}>
+          + Add ingredient
+        </button>
       </form>
       {ingredientsList.length > 0 && (
         <div className={styles.onHandsContainer}>
@@ -39,10 +53,27 @@ export default function IngredientsSection() {
           <ul className={styles.ingredientsList}>
             {ingredientsList.map(ingredient => (
               <li key={ingredient.id} className={styles.ingredientsListItem}>
-                {ingredient.name}
+                <span className={styles.ingredientName} title={ingredient.name}>
+                  {ingredient.name}
+                </span>
+                <RxCross2
+                  className={styles.deleteIcon}
+                  onClick={() => handleDeleteIngredient(ingredient.id)}
+                />
               </li>
             ))}
           </ul>
+          <div className={styles.ctaContainer}>
+            <div className={styles.ctaTexts}>
+              <h3 className={styles.ctaTitle}>Ready for a recipe?</h3>
+              <p className={styles.ctaDescription}>
+                Generate a recipe from your list of ingredients.
+              </p>
+            </div>
+            <button className={styles.ctaBtn} onClick={handleGetRecipe}>
+              Get a recipe
+            </button>
+          </div>
         </div>
       )}
     </section>
