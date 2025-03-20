@@ -1,0 +1,73 @@
+.sectionWrapper {
+  width: 100%;
+  height: auto;
+  padding: 16px 40px;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border-radius: var(--border-radius-mid);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.ingredientsForm {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.ingredientsInput,
+.ingredientsBtn {
+  max-height: 100%;
+  font-weight: var(--font-regular);
+  font-size: 1rem;
+  padding: 6px 12px;
+  border: none;
+  outline: none;
+  border-radius: var(--border-radius-small);
+}
+.ingredientsInput {
+  flex: 1;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+.ingredientsInput:focus {
+  border: 1px solid var(--color-accent);
+}
+.ingredientsBtn {
+  border: 1px solid var(--color-accent);
+  flex-shrink: 0;
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+@media (hover: hover) {
+  .ingredientsBtn:hover {
+    background-color: var(--color-white);
+    color: var(--color-accent);
+  }
+}
+.onHandsContainer {
+  width: 100%;
+  text-align: left;
+}
+.onHandsTitle {
+  margin: 0 0 12px 0;
+  font-size: 1.3rem;
+  font-weight: var(--font-medium);
+  text-decoration: underline;
+}
+.ingredientsList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 4px;
+}
+.ingredientsListItem {
+  padding: 4px 8px;
+  text-align: center;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--border-radius-small);
+}

@@ -1,0 +1,19 @@
+.header {
+  width: 100%;
+  height: auto;
+  padding: 16px 40px;
+  font-weight: var(--font-semibold);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border-radius: var(--border-radius-mid);
+}
+.headerTitle {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.headerLogo {
+  color: var(--color-accent);
+  user-select: none;
+  text-decoration: none;
+  cursor: default;
+}
