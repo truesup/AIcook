@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-import { RxCross2 } from 'react-icons/rx'
+import { RxCross2, RxCheck } from 'react-icons/rx'
 import { ExpandContext } from '../contexts/ExpandContext'
 import styles from './IngredientsSection.module.css'
 
@@ -42,8 +42,14 @@ export default function IngredientsSection() {
 
   return (
     <section
-      className={`${styles.sectionWrapper} ${isExpanded && styles.expanded}`}>
-      <form className={styles.ingredientsForm} onSubmit={handleAddIngredient}>
+      className={`${styles.sectionWrapper} ${
+        isExpanded ? styles.expanded : ''
+      }`}>
+      <form
+        className={`${styles.ingredientsForm} ${
+          isExpanded ? styles.formExpanded : ''
+        }`}
+        onSubmit={handleAddIngredient}>
         <input
           className={styles.ingredientsInput}
           type="text"
@@ -64,14 +70,21 @@ export default function IngredientsSection() {
                 <span className={styles.ingredientName} title={ingredient.name}>
                   {ingredient.name}
                 </span>
-                <RxCross2
-                  className={styles.deleteIcon}
-                  onClick={() => handleDeleteIngredient(ingredient.id)}
-                />
+                {isExpanded ? (
+                  <RxCheck className={styles.addedIcon} />
+                ) : (
+                  <RxCross2
+                    className={styles.deleteIcon}
+                    onClick={() => handleDeleteIngredient(ingredient.id)}
+                  />
+                )}
               </li>
             ))}
           </ul>
-          <div className={styles.ctaContainer}>
+          <div
+            className={`${styles.ctaContainer} ${
+              isExpanded ? styles.ctaContainerExpanded : ''
+            }`}>
             <div className={styles.ctaTexts}>
               <h3 className={styles.ctaTitle}>Ready for a recipe?</h3>
               <p className={styles.ctaDescription}>

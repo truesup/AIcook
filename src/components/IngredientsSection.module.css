@@ -65,6 +65,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 8px 4px;
+  transition: all 0.5s ease;
 }
 .ingredientsListItem {
   max-width: 258px;
@@ -76,6 +77,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  transition: all 0.5s ease;
 }
 .ingredientName {
   text-align: left;
@@ -91,6 +93,9 @@
   justify-content: center;
   transform: translateY(2px);
   transition: color 0.2s ease;
+}
+.addedIcon {
+  color: green;
 }
 .ctaContainer {
   width: 100%;
@@ -142,5 +147,12 @@
 }
 .sectionWrapper.expanded {
   height: 100%;
-  width: 600px;
+  width: 940px;
+  justify-content: space-between;
+}
+.ingredientsForm.formExpanded {
+  display: none;
+}
+.ctaContainer.ctaContainerExpanded {
+  display: none;
 }

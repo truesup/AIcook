@@ -12,14 +12,10 @@ export default function App() {
     <div
       className={`${styles.appWrapper} ${isExpanded ? styles.expanded : ''}`}>
       <Header />
-      {isExpanded ? (
-        <main className={styles.mainSectionsWrapper}>
-          <IngredientsSection />
-          <RecipeSection />
-        </main>
-      ) : (
+      <main className={styles.mainSectionsWrapper}>
         <IngredientsSection />
-      )}
+        {isExpanded && <RecipeSection />}
+      </main>
     </div>
   )
 }
