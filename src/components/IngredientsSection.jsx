@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { RxCross2 } from 'react-icons/rx'
+import { ExpandContext } from '../contexts/ExpandContext'
 import styles from './IngredientsSection.module.css'
 
 export default function IngredientsSection() {
   const [inputValue, setInputValue] = useState('')
   const [ingredientsList, setIngredientsList] = useState([])
+  // const [isLoading, setIsLoading] = useState(false)
+  const { isExpanded, setIsExpanded } = useContext(ExpandContext)
 
   const handleInputChange = e => {
     setInputValue(e.target.value)
@@ -31,10 +34,15 @@ export default function IngredientsSection() {
     )
   }
 
-  const handleGetRecipe = () => {}
+  const handleGetRecipe = () => {
+    // setIsLoading(prevValue => !prevValue)
+    console.log('getting recipe...')
+    setIsExpanded(true)
+  }
 
   return (
-    <section className={styles.sectionWrapper}>
+    <section
+      className={`${styles.sectionWrapper} ${isExpanded && styles.expanded}`}>
       <form className={styles.ingredientsForm} onSubmit={handleAddIngredient}>
         <input
           className={styles.ingredientsInput}
@@ -71,6 +79,11 @@ export default function IngredientsSection() {
               </p>
             </div>
             <button className={styles.ctaBtn} onClick={handleGetRecipe}>
+              {/* {isLoading ? (
+                <div className={styles.ctaBtnLoader}></div>
+              ) : (
+                'Get a recipe'
+              )} */}
               Get a recipe
             </button>
           </div>

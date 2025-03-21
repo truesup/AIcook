@@ -6,6 +6,7 @@
   background-color: var(--color-white);
   color: var(--color-black);
   border-radius: var(--border-radius-mid);
+  transition: all 0.5s ease;
 }
 .headerTitle {
   margin: 0;

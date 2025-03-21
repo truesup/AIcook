@@ -1,0 +1,17 @@
+.sectionWrapper {
+  width: 100%;
+  height: auto;
+  padding: 16px 40px;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border-radius: var(--border-radius-mid);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  transition: all 0.2s ease-in-out;
+}
+.sectionWrapper.expanded {
+  height: 100%;
+}
