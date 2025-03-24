@@ -1,9 +1,9 @@
 import ReactMarkdown from 'react-markdown'
 import { useContext } from 'react'
 import { RecipeContext } from '../contexts/RecipeContext'
-import styles from './Recipe.module.css'
 import { IngredientsContext } from '../contexts/IngredientsContext'
 import { LoadingContext } from '../contexts/LoadingContext'
+import styles from './Recipe.module.css'
 
 export default function Recipe() {
   const { generatedRecipe } = useContext(RecipeContext)

@@ -4,8 +4,8 @@ import { useState, useRef, useEffect, useContext } from 'react'
 import { getRecipe } from '../utils/ai'
 import { RecipeContext } from '../contexts/RecipeContext'
 import { LoadingContext } from '../contexts/LoadingContext'
-import styles from './Ingredients.module.css'
 import { IngredientsContext } from '../contexts/IngredientsContext'
+import styles from './Ingredients.module.css'
 
 export default function Ingredients() {
   const inputRef = useRef(null)
