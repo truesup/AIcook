@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { LoadingContext } from './context/LoadingContext'
+import { LoadingContext } from './contexts/LoadingContext'
 import Header from './components/Header'
 import Ingredients from './components/Ingredients'
 import Recipe from './components/Recipe'

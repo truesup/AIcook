@@ -1,18 +1,19 @@
-import { useState, useRef, useEffect, useContext } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { RxCross2 } from 'react-icons/rx'
-import { RecipeContext } from '../context/RecipeContext'
+import { useState, useRef, useEffect, useContext } from 'react'
 import { getRecipe } from '../utils/ai'
+import { RecipeContext } from '../contexts/RecipeContext'
+import { LoadingContext } from '../contexts/LoadingContext'
 import styles from './Ingredients.module.css'
-import { LoadingContext } from '../context/LoadingContext'
+import { IngredientsContext } from '../contexts/IngredientsContext'
 
 export default function Ingredients() {
   const inputRef = useRef(null)
   const [inputValue, setInputValue] = useState('')
-  const [ingredientsList, setIngredientsList] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const { ingredientsList, setIngredientsList } = useContext(IngredientsContext)
   const { setGeneratedRecipe } = useContext(RecipeContext)
-  const { setRecipeIsLoaded } = useContext(LoadingContext)
+  const { recipeIsLoaded, setRecipeIsLoaded } = useContext(LoadingContext)
 
   useEffect(() => {
     inputRef.current.focus()
@@ -63,8 +64,12 @@ export default function Ingredients() {
           placeholder="Put ingredient name here..."
           value={inputValue}
           onChange={handleInputChange}
+          disabled={recipeIsLoaded}
         />
-        <button className={styles.formBtn} type="submit">
+        <button
+          className={styles.formBtn}
+          type="submit"
+          disabled={recipeIsLoaded}>
           + Add ingredient
         </button>
       </form>
@@ -84,7 +89,7 @@ export default function Ingredients() {
               </li>
             ))}
           </ul>
-          {ingredientsList.length > 3 && (
+          {ingredientsList.length > 2 && (
             <div className={styles.ctaWrapper}>
               <div className={styles.ctaTexts}>
                 <p className={styles.ctaTitle}>Ready for a recipe?</p>

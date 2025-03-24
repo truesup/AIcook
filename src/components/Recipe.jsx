@@ -1,16 +1,21 @@
-import { useContext } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { RecipeContext } from '../context/RecipeContext'
+import { useContext } from 'react'
+import { RecipeContext } from '../contexts/RecipeContext'
 import styles from './Recipe.module.css'
-import { LoadingContext } from '../context/LoadingContext'
+import { IngredientsContext } from '../contexts/IngredientsContext'
+import { LoadingContext } from '../contexts/LoadingContext'
 
 export default function Recipe() {
   const { generatedRecipe } = useContext(RecipeContext)
+  const { setIngredientsList } = useContext(IngredientsContext)
   const { setRecipeIsLoaded } = useContext(LoadingContext)
 
   const [prompt, recipe] = generatedRecipe.split('---')
 
-  const handleReset = () => {}
+  const handleReset = () => {
+    setIngredientsList([])
+    setRecipeIsLoaded(false)
+  }
 
   return (
     <section className={styles.recipeWrapper}>
