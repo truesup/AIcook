@@ -1,0 +1,12 @@
+.footer {
+  margin-top: 16px;
+  color: var(--color-black);
+}
+.footerLink {
+  transition: color 0.2s ease;
+}
+@media (hover: hover) {
+  .footerLink:hover {
+    color: var(--color-accent);
+  }
+}
