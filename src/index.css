@@ -102,16 +102,16 @@ body {
 
 /* styles */
 #root {
-  width: 100%;
-  height: 100%;
+  width: 600px;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 body {
   width: 100%;
-  height: 100%;
-  padding: 80px;
+  height: auto;
+  /* padding: 200px; */
   background-color: var(--color-white);
   color: var(--color-black);
   background-image: url('./assets/bg-img.jpg');
@@ -121,4 +121,5 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: scroll;
 }

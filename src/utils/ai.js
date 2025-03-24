@@ -17,7 +17,7 @@ Feel free to add minimal extra ingredients if needed, but keep them within reaso
 
 The response must be formatted in Markdown and follow this exact structure:
 - First, include a heading **Ingredients:** followed by a bullet list of ingredients with approximate measurements in grams (or other suitable units).
-- Second, include a heading **How to cook:** followed by a bullet list of step-by-step cooking instructions.
+- Second, include a heading **Instructions:** followed by a bullet list of step-by-step cooking instructions.
 
 At the end, please include a brief serving suggestion or garnish tip to elevate the dish. 
 Have fun, and let your culinary imagination soar!

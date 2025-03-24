@@ -1,21 +1,13 @@
-import { useContext } from 'react'
-import { ExpandContext } from './contexts/ExpandContext'
 import Header from './components/Header'
-import IngredientsSection from './components/IngredientsSection'
-import RecipeSection from './components/RecipeSection'
+import Footer from './components/Footer'
 import styles from './App.module.css'
 
 export default function App() {
-  const { isExpanded } = useContext(ExpandContext)
-
   return (
-    <div
-      className={`${styles.appWrapper} ${isExpanded ? styles.expanded : ''}`}>
+    <div className={styles.appWrapper}>
       <Header />
-      <main className={styles.mainSectionsWrapper}>
-        <IngredientsSection />
-        {isExpanded && <RecipeSection />}
-      </main>
+      <main className={styles.mainSectionsWrapper}>This is main</main>
+      <Footer />
     </div>
   )
 }
