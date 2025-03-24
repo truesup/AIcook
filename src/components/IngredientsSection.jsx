@@ -2,12 +2,15 @@ import { useContext, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { RxCross2, RxCheck } from 'react-icons/rx'
 import { ExpandContext } from '../contexts/ExpandContext'
+import { RecipeContext } from '../contexts/RecipeContext'
+import { getRecipe } from '../utils/ai'
 import styles from './IngredientsSection.module.css'
 
 export default function IngredientsSection() {
   const [inputValue, setInputValue] = useState('')
   const [ingredientsList, setIngredientsList] = useState([])
   const { isExpanded, setIsExpanded } = useContext(ExpandContext)
+  const { setGeneratedRecipe } = useContext(RecipeContext)
 
   const handleInputChange = e => {
     setInputValue(e.target.value)
@@ -33,9 +36,13 @@ export default function IngredientsSection() {
     )
   }
 
-  const handleGetRecipe = () => {
+  async function handleGetRecipe() {
     console.log('getting recipe...')
     setIsExpanded(true)
+
+    const ingredientsNames = ingredientsList.map(ingredient => ingredient.name)
+    const recipe = await getRecipe(ingredientsNames)
+    setGeneratedRecipe(recipe)
   }
 
   return (
@@ -98,19 +105,13 @@ export default function IngredientsSection() {
               isExpanded ? styles.ctaContainerExpanded : ''
             }`}>
             <div className={styles.ctaTexts}>
-              <h3 className={styles.ctaTitle}>
-                {isExpanded
-                  ? 'Ready for another recipe?'
-                  : 'Ready for a recipe?'}
-              </h3>
+              <h3 className={styles.ctaTitle}>Ready for a recipe?</h3>
               <p className={styles.ctaDescription}>
-                {isExpanded
-                  ? ''
-                  : 'Generate a recipe from your list of ingredients.'}
+                Generate a recipe from your list of ingredients.
               </p>
             </div>
             <button className={styles.ctaBtn} onClick={handleGetRecipe}>
-              {isExpanded ? 'Make another recipe' : 'Get a recipe'}
+              Get a recipe
             </button>
           </div>
         </div>
