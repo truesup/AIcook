@@ -1,12 +1,18 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { RxCross2 } from 'react-icons/rx'
+import { RecipeContext } from '../context/RecipeContext'
+import { getRecipe } from '../utils/ai'
 import styles from './Ingredients.module.css'
+import { LoadingContext } from '../context/LoadingContext'
 
 export default function Ingredients() {
   const inputRef = useRef(null)
   const [inputValue, setInputValue] = useState('')
   const [ingredientsList, setIngredientsList] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
+  const { setGeneratedRecipe } = useContext(RecipeContext)
+  const { setRecipeIsLoaded } = useContext(LoadingContext)
 
   useEffect(() => {
     inputRef.current.focus()
@@ -32,6 +38,19 @@ export default function Ingredients() {
     setIngredientsList(prevIngredients =>
       prevIngredients.filter(ingredient => ingredient.id !== id)
     )
+  }
+
+  const handleGetRecipe = async () => {
+    setIsLoading(true)
+
+    const ingredientsNames = ingredientsList.map(ingredient => ingredient.name)
+    const recipe = await getRecipe(ingredientsNames)
+    setGeneratedRecipe(recipe)
+
+    if (recipe) {
+      setIsLoading(false)
+      setRecipeIsLoaded(true)
+    }
   }
 
   return (
@@ -73,7 +92,16 @@ export default function Ingredients() {
                   Generate a recipe from your list of ingredients.
                 </p>
               </div>
-              <button className={styles.ctaBtn}>Get a recipe</button>
+              <button
+                className={styles.ctaBtn}
+                onClick={handleGetRecipe}
+                disabled={isLoading}>
+                {isLoading ? (
+                  <div className={styles.loader}></div>
+                ) : (
+                  'Get a recipe'
+                )}
+              </button>
             </div>
           )}
         </div>

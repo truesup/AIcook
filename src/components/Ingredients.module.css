@@ -112,3 +112,16 @@
     color: var(--color-accent);
   }
 }
+.loader {
+  width: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--color-white);
+  border-right-color: var(--color-accent);
+  animation: l2 1s infinite linear;
+}
+@keyframes l2 {
+  to {
+    transform: rotate(1turn);
+  }
+}

@@ -1,0 +1,24 @@
+.recipeWrapper {
+  padding-top: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  gap: 16px;
+}
+.title {
+  margin: 0;
+  font-size: 1.3rem;
+  text-decoration: underline;
+}
+.recipeWrapper p,
+.recipeWrapper ul,
+.recipeWrapper ol {
+  margin: 0;
+  text-align: left;
+}
+.recipeWrapper p {
+  text-align: justify;
+  word-wrap: break-word;
+  hyphens: auto;
+}

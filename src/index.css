@@ -109,7 +109,7 @@ body {
   justify-content: center;
 }
 body {
-  width: 100%;
+  width: 100dvw;
   height: auto;
   background-color: var(--color-white);
   color: var(--color-black);
