@@ -111,7 +111,6 @@ body {
 body {
   width: 100%;
   height: auto;
-  /* padding: 200px; */
   background-color: var(--color-white);
   color: var(--color-black);
   background-image: url('./assets/bg-img.jpg');
