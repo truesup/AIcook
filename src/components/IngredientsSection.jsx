@@ -7,7 +7,6 @@ import styles from './IngredientsSection.module.css'
 export default function IngredientsSection() {
   const [inputValue, setInputValue] = useState('')
   const [ingredientsList, setIngredientsList] = useState([])
-  // const [isLoading, setIsLoading] = useState(false)
   const { isExpanded, setIsExpanded } = useContext(ExpandContext)
 
   const handleInputChange = e => {
@@ -35,7 +34,6 @@ export default function IngredientsSection() {
   }
 
   const handleGetRecipe = () => {
-    // setIsLoading(prevValue => !prevValue)
     console.log('getting recipe...')
     setIsExpanded(true)
   }
@@ -64,14 +62,28 @@ export default function IngredientsSection() {
       {ingredientsList.length > 0 && (
         <div className={styles.onHandsContainer}>
           <h2 className={styles.onHandsTitle}>Ingredients on hands:</h2>
-          <ul className={styles.ingredientsList}>
+          <ul
+            className={
+              isExpanded
+                ? styles.ingredientsListExpanded
+                : styles.ingredientsList
+            }>
             {ingredientsList.map(ingredient => (
-              <li key={ingredient.id} className={styles.ingredientsListItem}>
+              <li
+                key={ingredient.id}
+                className={
+                  isExpanded
+                    ? styles.ingredientsListItemExpanded
+                    : styles.ingredientsListItem
+                }>
                 <span className={styles.ingredientName} title={ingredient.name}>
                   {ingredient.name}
                 </span>
                 {isExpanded ? (
-                  <RxCheck className={styles.addedIcon} />
+                  <RxCheck
+                    className={styles.addedIcon}
+                    title="This ingredient was included in the list."
+                  />
                 ) : (
                   <RxCross2
                     className={styles.deleteIcon}
@@ -86,18 +98,19 @@ export default function IngredientsSection() {
               isExpanded ? styles.ctaContainerExpanded : ''
             }`}>
             <div className={styles.ctaTexts}>
-              <h3 className={styles.ctaTitle}>Ready for a recipe?</h3>
+              <h3 className={styles.ctaTitle}>
+                {isExpanded
+                  ? 'Ready for another recipe?'
+                  : 'Ready for a recipe?'}
+              </h3>
               <p className={styles.ctaDescription}>
-                Generate a recipe from your list of ingredients.
+                {isExpanded
+                  ? ''
+                  : 'Generate a recipe from your list of ingredients.'}
               </p>
             </div>
             <button className={styles.ctaBtn} onClick={handleGetRecipe}>
-              {/* {isLoading ? (
-                <div className={styles.ctaBtnLoader}></div>
-              ) : (
-                'Get a recipe'
-              )} */}
-              Get a recipe
+              {isExpanded ? 'Make another recipe' : 'Get a recipe'}
             </button>
           </div>
         </div>
