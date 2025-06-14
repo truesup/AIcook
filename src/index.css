@@ -123,3 +123,6 @@ body {
   justify-content: center;
   overflow: scroll;
 }
+h2 {
+  margin: 0;
+}
