@@ -1,3 +1,5 @@
+AI-powered recipe generator based on ingredients you have.
+
 # 👨‍🍳 AIcook
 
 **AIcook** is a simple and creative web app that generates cooking recipes based on the ingredients you currently have.
