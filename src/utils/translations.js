@@ -15,8 +15,10 @@ const translations = {
     recipeInfoText:
       'Sometimes the AI may not work perfectly—these things happen, so please don’t worry. You can always refresh the page and try again. If you’re satisfied with the outcome, feel free to generate another recipe by clicking the button below.',
     recipeRestartBtn: 'Restart',
+    errorTitle: "Oops! Something's off...",
     errorHandlingMsg:
-      'Something went wrong with the recipe generation. You can try again or refresh the page.',
+      'The recipe couldn’t be generated this time. No worries — try again or refresh the page.',
+    errRestartBtn: 'Try again',
   },
   ru: {
     langToggleTitle: 'Текущий язык - Русский',
@@ -34,8 +36,10 @@ const translations = {
     recipeInfoText:
       'Иногда нейросеть может сработать не идеально — с кем не бывает, не переживайте. Вы всегда можете обновить страницу и попробовать снова. А если результат вас устроил — просто нажмите на кнопку ниже, чтобы получить ещё один рецепт.',
     recipeRestartBtn: 'Начать заново',
+    errorTitle: 'Что-то пошло не так...',
     errorHandlingMsg:
-      'Что-то пошло не так при генерации рецепта. Вы можете попробовать снова или обновить страницу.',
+      'Не удалось сгенерировать рецепт. Ничего страшного — попробуйте снова или обновите страницу.',
+    errRestartBtn: 'Попробовать ещё раз',
   },
 }
 

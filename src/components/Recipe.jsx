@@ -15,13 +15,13 @@ export default function Recipe() {
   const { setIngredientsList } = useContext(IngredientsContext)
   const { setRecipeIsLoaded } = useContext(LoadingContext)
 
-  const [prompt, recipe] = generatedRecipe.split('---')
-
   const handleReset = () => {
     setIngredientsList([])
     setRecipeIsLoaded(false)
     window.location.reload()
   }
+
+  const [prompt, recipe] = generatedRecipe.split('---')
 
   return (
     <section className={styles.recipeWrapper}>

@@ -14,6 +14,7 @@ export default function Ingredients() {
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [shouldShake, setShouldShake] = useState(false)
+  const [hasError, setHasError] = useState(false)
   const { ingredientsList, setIngredientsList } = useContext(IngredientsContext)
   const { setGeneratedRecipe } = useContext(RecipeContext)
   const { recipeIsLoaded, setRecipeIsLoaded } = useContext(LoadingContext)
@@ -65,14 +66,23 @@ export default function Ingredients() {
 
   const handleGetRecipe = async () => {
     setIsLoading(true)
+    setHasError(false)
 
     const ingredientsNames = ingredientsList.map(ingredient => ingredient.name)
-    const recipe = await getRecipe(ingredientsNames, lang)
-    setGeneratedRecipe(recipe)
 
-    if (recipe) {
+    try {
+      const recipe = await getRecipe(ingredientsNames, lang)
+
+      setGeneratedRecipe(recipe)
+      if (recipe) {
+        setRecipeIsLoaded(true)
+      } else {
+        setHasError(true)
+      }
+    } catch (error) {
+      setHasError(true)
+    } finally {
       setIsLoading(false)
-      setRecipeIsLoaded(true)
     }
   }
 
@@ -113,16 +123,34 @@ export default function Ingredients() {
           </ul>
           {ingredientsList.length > 2 && (
             <div className={styles.ctaWrapper}>
-              <div className={styles.ctaTexts}>
-                <p className={styles.ctaTitle}>{t.ctaTitle}</p>
-                <p className={styles.ctaInfo}>{t.ctaInfo}</p>
-              </div>
-              <button
-                className={styles.ctaBtn}
-                onClick={handleGetRecipe}
-                disabled={isLoading}>
-                {isLoading ? <div className={styles.loader}></div> : t.ctaBtn}
-              </button>
+              {hasError ? (
+                <div className={styles.errBanner}>
+                  <p className={styles.errorTitle}>{t.errorTitle}</p>
+                  <p className={styles.errorText}>{t.errorHandlingMsg}</p>
+                  <button
+                    className={styles.retryButton}
+                    onClick={() => window.location.reload()}>
+                    {t.errRestartBtn}
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className={styles.ctaTexts}>
+                    <p className={styles.ctaTitle}>{t.ctaTitle}</p>
+                    <p className={styles.ctaInfo}>{t.ctaInfo}</p>
+                  </div>
+                  <button
+                    className={styles.ctaBtn}
+                    onClick={handleGetRecipe}
+                    disabled={isLoading}>
+                    {isLoading ? (
+                      <div className={styles.loader}></div>
+                    ) : (
+                      t.ctaBtn
+                    )}
+                  </button>
+                </>
+              )}
             </div>
           )}
         </div>

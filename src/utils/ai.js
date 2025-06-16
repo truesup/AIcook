@@ -51,6 +51,6 @@ Have fun, and let your culinary imagination soar!
     return response.generated_text
   } catch (error) {
     console.error('Error generating recipe:', error)
-    return 'Error generating recipe'
+    return null
   }
 }
