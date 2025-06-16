@@ -50,7 +50,7 @@ export default function Ingredients() {
     setIsLoading(true)
 
     const ingredientsNames = ingredientsList.map(ingredient => ingredient.name)
-    const recipe = await getRecipe(ingredientsNames)
+    const recipe = await getRecipe(ingredientsNames, lang)
     setGeneratedRecipe(recipe)
 
     if (recipe) {
@@ -97,20 +97,14 @@ export default function Ingredients() {
           {ingredientsList.length > 2 && (
             <div className={styles.ctaWrapper}>
               <div className={styles.ctaTexts}>
-                <p className={styles.ctaTitle}>Ready for a recipe?</p>
-                <p className={styles.ctaInfo}>
-                  Generate a recipe from your list of ingredients.
-                </p>
+                <p className={styles.ctaTitle}>{t.ctaTitle}</p>
+                <p className={styles.ctaInfo}>{t.ctaInfo}</p>
               </div>
               <button
                 className={styles.ctaBtn}
                 onClick={handleGetRecipe}
                 disabled={isLoading}>
-                {isLoading ? (
-                  <div className={styles.loader}></div>
-                ) : (
-                  'Get a recipe'
-                )}
+                {isLoading ? <div className={styles.loader}></div> : t.ctaBtn}
               </button>
             </div>
           )}

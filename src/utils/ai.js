@@ -2,28 +2,44 @@ import { HfInference } from '@huggingface/inference'
 import { AI_TOKEN } from './ai-token'
 
 const HF_ACCESS_TOKEN = AI_TOKEN
-
-const MODEL_NAME = 'sarvamai/sarvam-m'
+const MODEL_NAME = 'HuggingFaceH4/zephyr-7b-beta'
 
 const hf = new HfInference(HF_ACCESS_TOKEN)
 
-export async function getRecipe(ingredientsArr) {
+export async function getRecipe(ingredientsArr, lang = 'ru') {
   const ingredientsString = ingredientsArr.join(', ')
 
-  const prompt = `You are a creative cooking companion.
-  The user currently has these ingredients on hand: ${ingredientsString}.
-  Your task is to propose a flavorful recipe using some or all of these ingredients, without feeling compelled to include them all.
-  Feel free to add minimal extra ingredients if needed, but keep them within reason.
+  const promptEn = `You are a creative cooking companion.
+The user currently has these ingredients on hand: ${ingredientsString}.
+Your task is to propose a flavorful recipe using some or all of these ingredients, without feeling compelled to include them all.
+Feel free to add minimal extra ingredients if needed, but keep them within reason.
 
-  The response must be formatted in Markdown and follow this exact structure:
-  - First, include a heading Ingredients: followed by a bullet list of ingredients with approximate measurements in grams (or other suitable units).
-  - Second, include a heading Instructions: followed by a bullet list of step-by-step cooking instructions.
+The response must be formatted in Markdown and follow this exact structure:
+- First, include a heading Ingredients: followed by a bullet list of ingredients with approximate measurements in grams (or other suitable units).
+- Second, include a heading Instructions: followed by a bullet list of step-by-step cooking instructions.
 
-  At the end, please include a brief serving suggestion or garnish tip to elevate the dish.
-  Have fun, and let your culinary imagination soar!
-  ---`
+At the end, please include a brief serving suggestion or garnish tip to elevate the dish.
+Have fun, and let your culinary imagination soar!
+---`
+
+  const promptRu = `Ты — креативный кулинарный помощник.
+У пользователя есть следующие ингредиенты: ${ingredientsString}.
+Твоя задача — предложить вкусный рецепт, используя некоторые или все из этих ингредиентов (необязательно все).
+Можно добавить немного дополнительных продуктов, если нужно, но без фанатизма.
+
+Ответ должен быть отформатирован в Markdown и строго в такой структуре:
+- Сначала заголовок **Ингредиенты:** и список с буллетами (с примерным количеством в граммах или других единицах).
+- Затем заголовок **Инструкция:** и список шагов приготовления.
+
+В конце добавь небольшой совет по сервировке или украшению блюда.
+Фантазируй и получай удовольствие!
+---`
+
+  const prompt = lang === 'ru' ? promptRu : promptEn
 
   try {
+    console.log('getRecipe called with:', ingredientsArr, lang)
+
     const response = await hf.textGeneration({
       model: MODEL_NAME,
       inputs: prompt,
