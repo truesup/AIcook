@@ -1,0 +1,21 @@
+.langButton {
+  margin: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.globeIcon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.globeIcon:active {
+  scale: 0.9;
+}

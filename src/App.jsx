@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import { LoadingContext } from './contexts/LoadingContext'
+import LanguageToggle from './components/LanguageToggle'
 import Header from './components/Header'
 import Ingredients from './components/Ingredients'
 import Recipe from './components/Recipe'
@@ -11,6 +12,7 @@ export default function App() {
 
   return (
     <>
+      <LanguageToggle />
       <div className={styles.appWrapper}>
         <Header />
         <main className={styles.mainWrapper}>
