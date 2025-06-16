@@ -2,9 +2,11 @@ import { v4 as uuidv4 } from 'uuid'
 import { RxCross2 } from 'react-icons/rx'
 import { useState, useRef, useEffect, useContext } from 'react'
 import { getRecipe } from '../utils/ai'
+import { LanguageContext } from '../contexts/LanguageContext'
 import { RecipeContext } from '../contexts/RecipeContext'
 import { LoadingContext } from '../contexts/LoadingContext'
 import { IngredientsContext } from '../contexts/IngredientsContext'
+import translations from '../utils/translations'
 import styles from './Ingredients.module.css'
 
 export default function Ingredients() {
@@ -14,6 +16,9 @@ export default function Ingredients() {
   const { ingredientsList, setIngredientsList } = useContext(IngredientsContext)
   const { setGeneratedRecipe } = useContext(RecipeContext)
   const { recipeIsLoaded, setRecipeIsLoaded } = useContext(LoadingContext)
+
+  const { lang } = useContext(LanguageContext)
+  const t = translations[lang]
 
   useEffect(() => {
     inputRef.current.focus()
@@ -61,7 +66,7 @@ export default function Ingredients() {
           className={styles.formInput}
           ref={inputRef}
           type="text"
-          placeholder="Put ingredient name here..."
+          placeholder={t.inputPlaceholder}
           value={inputValue}
           onChange={handleInputChange}
           disabled={recipeIsLoaded}
@@ -70,12 +75,12 @@ export default function Ingredients() {
           className={styles.formBtn}
           type="submit"
           disabled={recipeIsLoaded}>
-          + Add ingredient
+          + {t.addButtonText}
         </button>
       </form>
       {ingredientsList.length > 0 && (
         <div className={styles.ingredientsListWrapper}>
-          <h2 className={styles.ingredientsTitle}>Ingredients on hand:</h2>
+          <h2 className={styles.ingredientsTitle}>{t.ingredientsTitle}</h2>
           <ul className={styles.ingredientsList}>
             {ingredientsList.map(ingredient => (
               <li className={styles.ingredientsListItem} key={ingredient.id}>
