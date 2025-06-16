@@ -1,7 +1,7 @@
 import { FcGlobe } from 'react-icons/fc'
 import { useContext } from 'react'
 import { LanguageContext } from '../contexts/LanguageContext'
-import { LoadingContext } from '../contexts/LoadingContext'
+import { IngredientsContext } from '../contexts/IngredientsContext'
 import translations from '../utils/translations'
 import styles from './LanguageToggle.module.css'
 
@@ -9,7 +9,7 @@ export default function LanguageToggle() {
   const { lang, setLang } = useContext(LanguageContext)
   const t = translations[lang]
 
-  const { recipeIsLoaded } = useContext(LoadingContext)
+  const { ingredientsList } = useContext(IngredientsContext)
 
   const toggleLanguage = () => {
     setLang(prev => (prev === 'en' ? 'ru' : 'en'))
@@ -17,7 +17,7 @@ export default function LanguageToggle() {
 
   return (
     <button
-      style={{ display: recipeIsLoaded ? 'none' : 'flex' }}
+      style={{ display: ingredientsList.length > 0 ? 'none' : 'flex' }}
       className={styles.langButton}>
       <FcGlobe
         className={styles.globeIcon}

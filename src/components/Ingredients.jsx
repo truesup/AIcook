@@ -49,7 +49,18 @@ export default function Ingredients() {
   const handleAddIngredient = e => {
     e.preventDefault()
 
-    if (!inputValue.trim()) return
+    const trimmed = inputValue.trim().toLowerCase()
+    if (!trimmed) return
+
+    const alreadyExists = ingredientsList.some(
+      ingredient => ingredient.name.trim().toLowerCase() === trimmed
+    )
+
+    if (alreadyExists) {
+      setShouldShake(true)
+      setTimeout(() => setShouldShake(false), 300)
+      return
+    }
 
     setIngredientsList(prevIngredients => [
       ...prevIngredients,
