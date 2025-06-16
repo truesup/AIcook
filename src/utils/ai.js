@@ -3,7 +3,7 @@ import { AI_TOKEN } from './ai-token'
 
 const HF_ACCESS_TOKEN = AI_TOKEN
 
-const MODEL_NAME = 'mistralai/Mistral-7B-Instruct-v0.3'
+const MODEL_NAME = 'sarvamai/sarvam-m'
 
 const hf = new HfInference(HF_ACCESS_TOKEN)
 
