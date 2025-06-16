@@ -13,6 +13,7 @@ export default function Ingredients() {
   const inputRef = useRef(null)
   const [inputValue, setInputValue] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [shouldShake, setShouldShake] = useState(false)
   const { ingredientsList, setIngredientsList } = useContext(IngredientsContext)
   const { setGeneratedRecipe } = useContext(RecipeContext)
   const { recipeIsLoaded, setRecipeIsLoaded } = useContext(LoadingContext)
@@ -24,8 +25,24 @@ export default function Ingredients() {
     inputRef.current.focus()
   }, [])
 
+  const filterInputByLang = (value, lang) => {
+    if (lang === 'ru') {
+      return value.replace(/[^а-яёА-ЯЁ\s-]/g, '')
+    } else {
+      return value.replace(/[^a-zA-Z\s-]/g, '')
+    }
+  }
+
   const handleInputChange = e => {
-    setInputValue(e.target.value)
+    const raw = e.target.value
+    const filtered = filterInputByLang(raw, lang)
+
+    if (raw !== filtered) {
+      setShouldShake(true)
+      setTimeout(() => setShouldShake(false), 300)
+    }
+
+    setInputValue(filtered)
   }
 
   const handleAddIngredient = e => {
@@ -63,7 +80,7 @@ export default function Ingredients() {
     <section className={styles.ingredientsWrapper}>
       <form className={styles.form} onSubmit={handleAddIngredient}>
         <input
-          className={styles.formInput}
+          className={`${styles.formInput} ${shouldShake ? styles.shake : ''}`}
           ref={inputRef}
           type="text"
           placeholder={t.inputPlaceholder}

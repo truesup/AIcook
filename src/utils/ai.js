@@ -2,7 +2,7 @@ import { HfInference } from '@huggingface/inference'
 import { AI_TOKEN } from './ai-token'
 
 const HF_ACCESS_TOKEN = AI_TOKEN
-const MODEL_NAME = 'HuggingFaceH4/zephyr-7b-beta'
+const MODEL_NAME = 'openchat/openchat-3.5-0106'
 
 const hf = new HfInference(HF_ACCESS_TOKEN)
 
@@ -38,8 +38,6 @@ Have fun, and let your culinary imagination soar!
   const prompt = lang === 'ru' ? promptRu : promptEn
 
   try {
-    console.log('getRecipe called with:', ingredientsArr, lang)
-
     const response = await hf.textGeneration({
       model: MODEL_NAME,
       inputs: prompt,
